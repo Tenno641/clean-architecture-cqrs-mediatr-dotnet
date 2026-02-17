@@ -4,6 +4,8 @@ using GymManagement.Domain.Subscriptions;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using ErrorOr;
+using GymManagement.Application.Subscriptions.Queries.GetSubscription;
+using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace GymManagement.Api.Controllers;
 
@@ -27,6 +29,18 @@ public class SubscriptionsController : ControllerBase
 
         return response.Match(
             onValue: subscription => Ok(new SubscriptionResponse(subscription.Id, SubscriptionType.Free)),
+            onError: _ => Problem());
+    }
+
+    [HttpGet("{id:guid}")]
+    public async Task<IActionResult> Get(Guid id, CancellationToken cancellationToken)
+    {
+        GetSubscriptionQuery query = new GetSubscriptionQuery(id);
+        
+        ErrorOr<Subscription> result = await _mediator.Send(query, cancellationToken);
+
+        return result.Match(
+            onValue: subscription => Ok(new SubscriptionResponse(id, Enum.Parse<SubscriptionType>(subscription.SubscriptionType))),
             onError: _ => Problem());
     }
 }

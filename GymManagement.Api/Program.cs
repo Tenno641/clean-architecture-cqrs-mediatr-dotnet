@@ -10,7 +10,7 @@ builder.Services.AddControllers().AddJsonOptions(options =>
 });
 
 builder.Services
-    .AddApplication()
+    .AddApplication(builder.Configuration["mediator"]!)
     .AddInfrastructure();
 
 var app = builder.Build();

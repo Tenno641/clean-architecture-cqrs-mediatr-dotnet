@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
     <ItemGroup>
       <ProjectReference Include="..\GymManagement.Application\GymManagement.Application.csproj" />
@@ -10,6 +10,7 @@
         <TargetFramework>net10.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
-    </PropertyGroup>
+      <UserSecretsId>e8384303-d2fe-4a69-b947-bfd9d43feca1</UserSecretsId>
+  </PropertyGroup>
 
 </Project>

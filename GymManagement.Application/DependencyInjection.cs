@@ -4,10 +4,11 @@ namespace GymManagement.Application;
 
 public static class DependencyInjection
 {
-    public static IServiceCollection AddApplication(this IServiceCollection services)
+    public static IServiceCollection AddApplication(this IServiceCollection services, string licenseKey)
     {
         services.AddMediatR(configuration =>
         {
+            configuration.LicenseKey = licenseKey;
             configuration.RegisterServicesFromAssemblyContaining(typeof(DependencyInjection));
         });
 
