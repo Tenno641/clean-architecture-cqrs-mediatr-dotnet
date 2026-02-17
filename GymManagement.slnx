@@ -1,0 +1,11 @@
+<Solution>
+  <Configurations>
+    <Platform Name="Any CPU" />
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="GymManagement.Api/GymManagement.Api.csproj" />
+  <Project Path="GymManagement.Application/GymManagement.Application.csproj" />
+  <Project Path="GymManagement.Domain/GymManagement.Domain.csproj" />
+  <Project Path="GymManagement.Infrastructure/GymManagement.Infrastructure.csproj" />
+</Solution>
