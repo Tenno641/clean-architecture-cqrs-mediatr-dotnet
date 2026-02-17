@@ -1,5 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
+    <ItemGroup>
+      <ProjectReference Include="..\GymManagement.Application\GymManagement.Application.csproj" />
+      <ProjectReference Include="..\GymManagement.Contracts\GymManagement.Contracts.csproj" />
+    </ItemGroup>
+
     <PropertyGroup>
         <TargetFramework>net10.0</TargetFramework>
         <Nullable>enable</Nullable>
