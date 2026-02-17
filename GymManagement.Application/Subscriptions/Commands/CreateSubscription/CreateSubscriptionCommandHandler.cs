@@ -8,11 +8,11 @@ namespace GymManagement.Application.Subscriptions.Commands.CreateSubscription;
 public class CreateSubscriptionCommandHandler : IRequestHandler<CreateSubscriptionCommand, ErrorOr<Subscription>>
 {
     private readonly ISubscriptionsRepository _subscriptionsRepository;
-    private readonly IUnitOfWork _unitOfWork;
+    // private readonly IUnitOfWork _unitOfWork;
     
-    public CreateSubscriptionCommandHandler(ISubscriptionsRepository subscriptionsRepository, IUnitOfWork unitOfWork)
+    public CreateSubscriptionCommandHandler(ISubscriptionsRepository subscriptionsRepository)
     {
-        _unitOfWork = unitOfWork;
+        // _unitOfWork = unitOfWork;
         _subscriptionsRepository = subscriptionsRepository;
     }
     
@@ -20,12 +20,13 @@ public class CreateSubscriptionCommandHandler : IRequestHandler<CreateSubscripti
     {
         Subscription subscription = new Subscription
         {
-            Id = Guid.NewGuid()
+            Id = Guid.NewGuid(),
+            SubscriptionType = request.SubscriptionType
         };
 
-        await _unitOfWork.SaveChangesAsync();
+        // await _unitOfWork.SaveChangesAsync();
         
-        await _subscriptionsRepository.CreateSubscription(subscription);
+        await _subscriptionsRepository.CreateSubscriptionAsync(subscription);
 
         return subscription;
     }
