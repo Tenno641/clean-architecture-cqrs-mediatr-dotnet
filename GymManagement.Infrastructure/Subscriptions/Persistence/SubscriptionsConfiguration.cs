@@ -8,6 +8,15 @@ public class SubscriptionsConfiguration : IEntityTypeConfiguration<Subscription>
 {
     public void Configure(EntityTypeBuilder<Subscription> builder)
     {
+        builder.HasKey(s => s.Id);
+
+        builder
+            .Property(s => s.Id)
+            .ValueGeneratedNever();
+
+        builder
+            .Property(nameof(Subscription.AdminId));
+        
         builder
             .Property(s => s.SubscriptionType)
             .HasConversion<string>()

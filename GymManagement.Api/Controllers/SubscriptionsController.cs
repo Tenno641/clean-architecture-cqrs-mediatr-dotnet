@@ -27,7 +27,7 @@ public class SubscriptionsController : ApiController
         ErrorOr<Subscription> response = await _mediator.Send(command, cancellationToken);
 
         return response.MatchFirst(
-            onValue: subscription => Ok(new SubscriptionResponse(subscription.Id, subscription.SubscriptionType)),
+            onValue: subscription => Ok(new SubscriptionResponse(subscription.Id, subscription.SubscriptionType, subscription.AdminId)),
             onFirstError: error => Problem(error));
     }
 
@@ -39,7 +39,7 @@ public class SubscriptionsController : ApiController
         ErrorOr<Subscription> result = await _mediator.Send(query, cancellationToken);
 
         return result.MatchFirst<IActionResult>(
-            onValue: subscription => Ok(new SubscriptionResponse(id, subscription.SubscriptionType)),
+            onValue: subscription => Ok(new SubscriptionResponse(subscription.Id, subscription.SubscriptionType, subscription.AdminId)),
             onFirstError: error => Problem(error));
     }
 }
