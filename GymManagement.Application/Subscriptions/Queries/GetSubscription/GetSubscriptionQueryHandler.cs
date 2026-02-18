@@ -1,5 +1,5 @@
 ﻿using ErrorOr;
-using GymManagement.Application.Common;
+using GymManagement.Application.Common.Interfaces;
 using GymManagement.Domain.Subscriptions;
 using MediatR;
 
