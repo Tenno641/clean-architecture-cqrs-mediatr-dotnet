@@ -15,7 +15,7 @@ public static class DependencyInjection
         services.AddScoped<IUnitOfWork, GymDbContext>();
 
         services.AddDbContext<GymDbContext>();
-        
+
         return services;
     }
 }

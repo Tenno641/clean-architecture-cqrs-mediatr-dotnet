@@ -10,24 +10,24 @@ namespace GymManagement.Api.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class SubscriptionsController : ApiController 
+public class SubscriptionsController : ApiController
 {
     private readonly IMediator _mediator;
-    
+
     public SubscriptionsController(IMediator mediator)
     {
         _mediator = mediator;
     }
-    
+
     [HttpPost]
     public async Task<IActionResult> Create(CreateSubscription request, CancellationToken cancellationToken)
     {
-        CreateSubscriptionCommand command = new CreateSubscriptionCommand(request.SubscriptionType.ToString(), request.AdminId);
+        CreateSubscriptionCommand command = new CreateSubscriptionCommand(request.SubscriptionType, request.AdminId);
 
         ErrorOr<Subscription> response = await _mediator.Send(command, cancellationToken);
 
         return response.MatchFirst(
-            onValue: subscription => Ok(new SubscriptionResponse(subscription.Id, SubscriptionType.Free)),
+            onValue: subscription => Ok(new SubscriptionResponse(subscription.Id, subscription.SubscriptionType)),
             onFirstError: error => Problem(error));
     }
 
@@ -35,11 +35,11 @@ public class SubscriptionsController : ApiController
     public async Task<IActionResult> Get(Guid id, CancellationToken cancellationToken)
     {
         GetSubscriptionQuery query = new GetSubscriptionQuery(id);
-        
+
         ErrorOr<Subscription> result = await _mediator.Send(query, cancellationToken);
 
         return result.MatchFirst<IActionResult>(
-            onValue: subscription => Ok(new SubscriptionResponse(id, Enum.Parse<SubscriptionType>(subscription.SubscriptionType))),
+            onValue: subscription => Ok(new SubscriptionResponse(id, subscription.SubscriptionType)),
             onFirstError: error => Problem(error));
     }
 }

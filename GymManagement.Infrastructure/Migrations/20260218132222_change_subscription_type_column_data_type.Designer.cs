@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace GymManagement.Infrastructure.Migrations
 {
     [DbContext(typeof(GymDbContext))]
-    [Migration("20260218000647_Initial")]
-    partial class Initial
+    [Migration("20260218132222_change_subscription_type_column_data_type")]
+    partial class change_subscription_type_column_data_type
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -31,9 +31,8 @@ namespace GymManagement.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<string>("SubscriptionType")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<int>("SubscriptionType")
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 

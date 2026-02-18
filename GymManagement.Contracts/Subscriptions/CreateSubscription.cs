@@ -1,4 +1,4 @@
-﻿using System.Text.Json.Serialization;
+﻿using GymManagement.SharedKernel.Enums;
 
 namespace GymManagement.Contracts.Subscriptions;
 

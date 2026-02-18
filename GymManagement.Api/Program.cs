@@ -1,6 +1,7 @@
 using System.Text.Json.Serialization;
 using GymManagement.Application;
 using GymManagement.Infrastructure;
+using GymManagement.Infrastructure.Common.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 

@@ -28,9 +28,8 @@ namespace GymManagement.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<string>("SubscriptionType")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<int>("SubscriptionType")
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 

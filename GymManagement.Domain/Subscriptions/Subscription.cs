@@ -1,7 +1,9 @@
-﻿namespace GymManagement.Domain.Subscriptions;
+﻿using GymManagement.SharedKernel.Enums;
+
+namespace GymManagement.Domain.Subscriptions;
 
 public class Subscription
 {
     public Guid Id { get; set; }
-    public string SubscriptionType { get; set; } = string.Empty;
+    public SubscriptionType SubscriptionType { get; set; }
 }

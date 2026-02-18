@@ -15,7 +15,7 @@ public class GymDbContext : DbContext, IUnitOfWork
         optionsBuilder.UseNpgsql("Host=localhost; Port=5432; Username=postgres; Password=password; Database=GymDB");
         base.OnConfiguring(optionsBuilder);
     }
-    
+
     public async Task CommitChangesAsync()
     {
         await SaveChangesAsync();

@@ -10,13 +10,13 @@ public class CreateSubscriptionCommandHandler : IRequestHandler<CreateSubscripti
 {
     private readonly ISubscriptionsRepository _subscriptionsRepository;
     private readonly IUnitOfWork _unitOfWork;
-    
+
     public CreateSubscriptionCommandHandler(ISubscriptionsRepository subscriptionsRepository, IUnitOfWork unitOfWork)
     {
         _unitOfWork = unitOfWork;
         _subscriptionsRepository = subscriptionsRepository;
     }
-    
+
     public async Task<ErrorOr<Subscription>> Handle(CreateSubscriptionCommand request, CancellationToken cancellationToken)
     {
         Subscription subscription = new Subscription
@@ -26,7 +26,7 @@ public class CreateSubscriptionCommandHandler : IRequestHandler<CreateSubscripti
         };
 
         await _unitOfWork.CommitChangesAsync();
-        
+
         await _subscriptionsRepository.CreateSubscriptionAsync(subscription);
 
         return subscription;

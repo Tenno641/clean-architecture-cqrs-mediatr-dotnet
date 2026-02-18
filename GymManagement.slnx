@@ -9,4 +9,10 @@
   <Project Path="GymManagement.Contracts/GymManagement.Contracts.csproj" />
   <Project Path="GymManagement.Domain/GymManagement.Domain.csproj" />
   <Project Path="GymManagement.Infrastructure/GymManagement.Infrastructure.csproj" />
+  <Project Path="GymManagement.SharedKernel\GymManagement.SharedKernel.csproj" Type="Classic C#">
+    <Configuration Solution="Debug|x64" Project="Debug|Any CPU" />
+    <Configuration Solution="Debug|x86" Project="Debug|Any CPU" />
+    <Configuration Solution="Release|x64" Project="Release|Any CPU" />
+    <Configuration Solution="Release|x86" Project="Release|Any CPU" />
+  </Project>
 </Solution>
