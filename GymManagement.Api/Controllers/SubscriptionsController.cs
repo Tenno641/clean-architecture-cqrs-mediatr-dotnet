@@ -5,13 +5,12 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using ErrorOr;
 using GymManagement.Application.Subscriptions.Queries.GetSubscription;
-using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace GymManagement.Api.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class SubscriptionsController : ControllerBase
+public class SubscriptionsController : ApiController 
 {
     private readonly IMediator _mediator;
     
@@ -27,9 +26,9 @@ public class SubscriptionsController : ControllerBase
 
         ErrorOr<Subscription> response = await _mediator.Send(command, cancellationToken);
 
-        return response.Match(
+        return response.MatchFirst(
             onValue: subscription => Ok(new SubscriptionResponse(subscription.Id, SubscriptionType.Free)),
-            onError: _ => Problem());
+            onFirstError: error => Problem(error));
     }
 
     [HttpGet("{id:guid}")]
@@ -39,8 +38,8 @@ public class SubscriptionsController : ControllerBase
         
         ErrorOr<Subscription> result = await _mediator.Send(query, cancellationToken);
 
-        return result.Match(
+        return result.MatchFirst<IActionResult>(
             onValue: subscription => Ok(new SubscriptionResponse(id, Enum.Parse<SubscriptionType>(subscription.SubscriptionType))),
-            onError: _ => Problem());
+            onFirstError: error => Problem(error));
     }
 }

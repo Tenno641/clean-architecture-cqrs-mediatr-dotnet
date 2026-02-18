@@ -9,9 +9,9 @@ builder.Services.AddControllers().AddJsonOptions(options =>
     options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
 });
 
-builder.Services
-    .AddApplication(builder.Configuration["mediator"]!)
-    .AddInfrastructure();
+builder.Services.AddApplication(builder.Configuration["mediator"]!);
+
+builder.Services.AddInfrastructure();
 
 var app = builder.Build();
 
