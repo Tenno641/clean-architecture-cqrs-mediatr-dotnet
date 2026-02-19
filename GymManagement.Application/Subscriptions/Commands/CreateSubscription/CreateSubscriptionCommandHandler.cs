@@ -22,9 +22,9 @@ public class CreateSubscriptionCommandHandler : IRequestHandler<CreateSubscripti
     {
         Subscription subscription = new Subscription(request.SubscriptionType, request.AdminId);
 
-        await _unitOfWork.CommitChangesAsync();
-
         await _subscriptionsRepository.CreateSubscriptionAsync(subscription);
+        
+        await _unitOfWork.CommitChangesAsync();
 
         return subscription;
     }

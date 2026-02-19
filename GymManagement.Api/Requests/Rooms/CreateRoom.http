@@ -1,0 +1,9 @@
+﻿@gymId = 019c76ca-34b4-7245-9341-3d1207d5a125
+@name = "523"
+
+POST https://localhost:7234/gyms/{{gymId}}/rooms
+Content-Type: application/json
+
+{
+  "Name": {{name}}
+}

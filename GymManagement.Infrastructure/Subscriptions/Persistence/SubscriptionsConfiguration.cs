@@ -22,5 +22,9 @@ public class SubscriptionsConfiguration : IEntityTypeConfiguration<Subscription>
             .Property(s => s.SubscriptionType)
             .HasConversion<string>()
             .HasMaxLength(20);
+
+        builder
+            .HasMany(s => s.Gyms)
+            .WithOne(g => g.Subscription);
     }
 }

@@ -15,13 +15,11 @@ public class SubscriptionsRepository : ISubscriptionsRepository
     public async Task CreateSubscriptionAsync(Subscription subscription)
     {
         await _context.Subscriptions.AddAsync(subscription);
-
-        await _context.SaveChangesAsync();
-
     }
     public async Task<Subscription?> GetSubscriptionByIdAsync(Guid id)
     {
         Subscription? subscription = await _context.Subscriptions
+            .Include(subscription => subscription.Gyms)
             .SingleOrDefaultAsync(subscription => subscription.Id == id);
 
         return subscription;
