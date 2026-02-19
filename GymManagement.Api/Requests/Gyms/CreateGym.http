@@ -1,0 +1,9 @@
+﻿@GymName = "Wgdy"
+@subscriptionId = 019c76ca-0124-7100-a82f-a58284c6b170
+
+POST https://localhost:7234/Subscriptions/{{subscriptionId}}/gyms
+Content-Type: application/json
+
+{
+  "Name" : {{GymName}}
+}

@@ -1,4 +1,7 @@
-﻿using GymManagement.Application.Common.Interfaces;
+﻿using System.Reflection;
+using GymManagement.Application.Common.Interfaces;
+using GymManagement.Domain.Gyms;
+using GymManagement.Domain.Rooms;
 using GymManagement.Domain.Subscriptions;
 using GymManagement.Infrastructure.Subscriptions.Persistence;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +13,8 @@ public class GymDbContext : DbContext, IUnitOfWork
     public GymDbContext(DbContextOptions<GymDbContext> options) : base(options) { }
 
     public DbSet<Subscription> Subscriptions { get; set; }
+    public DbSet<Gym> Gyms { get; set; }
+    public DbSet<Room> Rooms { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -19,7 +24,7 @@ public class GymDbContext : DbContext, IUnitOfWork
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.ApplyConfiguration(new SubscriptionsConfiguration());
+        modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
         base.OnModelCreating(modelBuilder);
     }

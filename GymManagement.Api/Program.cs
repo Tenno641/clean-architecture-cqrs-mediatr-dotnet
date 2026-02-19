@@ -16,11 +16,6 @@ builder.Services.AddInfrastructure();
 
 var app = builder.Build();
 
-using IServiceScope scope = app.Services.CreateScope();
-GymDbContext context = scope.ServiceProvider.GetRequiredService<GymDbContext>();
-context.Database.EnsureDeleted();
-context.Database.EnsureCreated();
-
 app.MapGet("/", () => "Hello World!");
 
 app.MapControllers();
