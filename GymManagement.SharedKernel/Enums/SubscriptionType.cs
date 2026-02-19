@@ -2,7 +2,7 @@
 
 public enum SubscriptionType
 {
-    Free,
+    Pro,
     Starter,
-    Pro
+    Free,
 }

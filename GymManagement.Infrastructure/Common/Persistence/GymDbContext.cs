@@ -20,7 +20,7 @@ public class GymDbContext : DbContext, IUnitOfWork
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfiguration(new SubscriptionsConfiguration());
-        
+
         base.OnModelCreating(modelBuilder);
     }
 

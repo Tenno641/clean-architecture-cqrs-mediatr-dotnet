@@ -1,5 +1,5 @@
 ﻿@host = https://localhost:7234
-@id = 019c712f-23f8-76bb-8bb9-17bd689c681c
+@id =019c755d-749f-7313-bf9d-f5c0e3c02a51 
 
 GET {{host}}/Subscriptions/{{id}}
 Content-Type: application/json

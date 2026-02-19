@@ -1,4 +1,5 @@
 ﻿using GymManagement.Domain.Subscriptions;
+using GymManagement.SharedKernel.Enums;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -16,7 +17,7 @@ public class SubscriptionsConfiguration : IEntityTypeConfiguration<Subscription>
 
         builder
             .Property(nameof(Subscription.AdminId));
-        
+
         builder
             .Property(s => s.SubscriptionType)
             .HasConversion<string>()

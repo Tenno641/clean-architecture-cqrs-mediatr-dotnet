@@ -5,6 +5,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using ErrorOr;
 using GymManagement.Application.Subscriptions.Queries.GetSubscription;
+using GymManagement.SharedKernel.Enums;
 
 namespace GymManagement.Api.Controllers;
 
