@@ -2,6 +2,7 @@
 using GymManagement.Application.Common.Interfaces;
 using GymManagement.Domain.Gyms;
 using GymManagement.Domain.Rooms;
+using GymManagement.Domain.Sessions;
 using GymManagement.Domain.Subscriptions;
 using GymManagement.Infrastructure.Subscriptions.Persistence;
 using Microsoft.EntityFrameworkCore;
@@ -15,6 +16,7 @@ public class GymDbContext : DbContext, IUnitOfWork
     public DbSet<Subscription> Subscriptions { get; set; }
     public DbSet<Gym> Gyms { get; set; }
     public DbSet<Room> Rooms { get; set; }
+    public DbSet<Session> Sessions { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {

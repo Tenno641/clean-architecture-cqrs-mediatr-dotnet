@@ -8,8 +8,6 @@ public class GymsConfiguration : IEntityTypeConfiguration<Gym>
 {
     public void Configure(EntityTypeBuilder<Gym> builder)
     {
-        builder
-            .Property("_maxRooms")
-            .HasColumnName("maxrooms");
+
     }
 }

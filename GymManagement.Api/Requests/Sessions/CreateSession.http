@@ -1,0 +1,12 @@
+﻿@roomId = 019c76ca-34b4-7245-9341-3d1207d5a125
+
+
+POST https://localhost:7234/rooms/{{roomId}}/sessions
+Content-Type: application/json
+
+{
+  "date": "2026-02-20",
+  "startTime": "14:30:00",
+  "duration": 90,
+  "type": "Zumba"
+}
