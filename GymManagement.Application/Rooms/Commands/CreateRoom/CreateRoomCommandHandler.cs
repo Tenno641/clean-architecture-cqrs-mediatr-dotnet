@@ -1,5 +1,4 @@
-﻿using System.Runtime.InteropServices.JavaScript;
-using ErrorOr;
+﻿using ErrorOr;
 using GymManagement.Application.Common.Interfaces;
 using GymManagement.Domain.Gyms;
 using GymManagement.Domain.Rooms;
@@ -37,7 +36,7 @@ public class CreateRoomCommandHandler : IRequestHandler<CreateRoomCommand, Error
         if (subscription is null)
             return Error.Unexpected("Gym Created without subscription");
 
-        Room room = new Room(request.Name, gym.Id);
+        Room room = new Room(request.Name, gym.Id, subscription.GetMaxDailySessions(), gym.Id);
 
         ErrorOr<Success> result = gym.AddRoom(room);
 

@@ -14,16 +14,16 @@ public class Gym
     public List<Room> Rooms { get; private set; } 
     
     public Guid SubscriptionId { get; private set; }
-    private int _maxRooms;
+    public int MaxRooms { get; private set; }
 
-    public Gym(string name, Guid subscriptionId, int maxRooms, Guid? id = null)
+    public Gym(string name, Guid subscriptionId, int maxRoomses, Guid? id = null)
     {
         Name = name;
         SubscriptionId = subscriptionId;
         Id = id ?? Guid.CreateVersion7();
 
-        Console.WriteLine($"const{maxRooms}");
-        _maxRooms = maxRooms;
+        Console.WriteLine($"const{maxRoomses}");
+        MaxRooms = maxRoomses;
     }
 
     public ErrorOr<Success> AddRoom(Room room)
@@ -31,7 +31,7 @@ public class Gym
         if (Rooms.Contains(room))
             throw new ConstraintException("Room already exists in gym");
         
-        if (Rooms.Count >= _maxRooms)
+        if (Rooms.Count >= MaxRooms)
             return GymErrors.CannotHaveMoreRooms;
         
         Rooms.Add(room);
