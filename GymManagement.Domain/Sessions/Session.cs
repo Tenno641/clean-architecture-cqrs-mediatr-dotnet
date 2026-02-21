@@ -9,11 +9,11 @@ public class Session
     public TimeOnly StartTime { get; private set; }
     public TimeOnly EndTime { get; private set; }
     public string Type { get; private set; }
-    
+
     public Guid RoomId { get; set; }
-    
+
     public Room Room { get; private set; }
-    
+
     public Session(DateOnly date, TimeOnly startTime, int duration, string type, Guid? id = null)
     {
         Date = date;
@@ -22,6 +22,6 @@ public class Session
         Type = type;
         Id = id ?? Guid.CreateVersion7();
     }
-    
+
     private Session() { }
 }

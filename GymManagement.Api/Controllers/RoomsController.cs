@@ -11,12 +11,12 @@ namespace GymManagement.Api.Controllers;
 public class RoomsController : ApiController
 {
     private readonly ISender _sender;
-    
+
     public RoomsController(ISender sender)
     {
         _sender = sender;
     }
-    
+
     [HttpPost]
     public async Task<IActionResult> Create(Guid gymId, CreateRoom request)
     {

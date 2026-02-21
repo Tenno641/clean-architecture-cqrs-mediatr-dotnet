@@ -11,12 +11,12 @@ namespace GymManagement.Api.Controllers;
 public class SessionsController : ApiController
 {
     private readonly ISender _mediator;
-    
+
     public SessionsController(ISender mediator)
     {
         _mediator = mediator;
     }
-    
+
     [HttpPost]
     public async Task<IActionResult> Create(Guid roomId, CreateSession request)
     {

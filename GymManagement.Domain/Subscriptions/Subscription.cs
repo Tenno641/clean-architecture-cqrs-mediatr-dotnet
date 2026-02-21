@@ -11,9 +11,9 @@ public class Subscription
     public Guid Id { get; private set; }
     public Guid AdminId { get; private set; }
     public SubscriptionType SubscriptionType { get; private set; }
-    
-    public List<Gym> Gyms { get; private set; } 
-    
+
+    public List<Gym> Gyms { get; private set; }
+
     public Subscription(SubscriptionType subscriptionType, Guid adminId, Guid? id = null)
     {
         SubscriptionType = subscriptionType;
@@ -39,12 +39,12 @@ public class Subscription
 
         if (Gyms.Count >= GetMaxNumberOfGyms(SubscriptionType))
             return SubscriptionErrors.CannotHaveMoreGyms;
-        
+
         Gyms.Add(gym);
 
         return Result.Success;
     }
-    
+
     public int GetMaxRooms() => SubscriptionType switch
     {
         SubscriptionType.Free => 1,

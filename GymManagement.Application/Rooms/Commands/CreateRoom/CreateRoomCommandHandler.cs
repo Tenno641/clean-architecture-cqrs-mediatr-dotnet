@@ -13,7 +13,7 @@ public class CreateRoomCommandHandler : IRequestHandler<CreateRoomCommand, Error
     private readonly IUnitOfWork _unitOfWork;
     private readonly IGymsRepository _gymsRepository;
     private readonly ISubscriptionsRepository _subscriptionsRepository;
-    
+
     public CreateRoomCommandHandler(IRoomsRepository roomsRepository, IUnitOfWork unitOfWork, IGymsRepository gymsRepository, ISubscriptionsRepository subscriptionsRepository)
     {
         _roomsRepository = roomsRepository;
@@ -21,7 +21,7 @@ public class CreateRoomCommandHandler : IRequestHandler<CreateRoomCommand, Error
         _gymsRepository = gymsRepository;
         _subscriptionsRepository = subscriptionsRepository;
     }
-    
+
     public async Task<ErrorOr<Guid>> Handle(CreateRoomCommand request, CancellationToken cancellationToken)
     {
         Gym? gym = await _gymsRepository.GetGymById(request.GymId);
