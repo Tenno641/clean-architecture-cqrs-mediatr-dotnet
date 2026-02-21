@@ -9,10 +9,10 @@ public class Room
 {
     public Guid Id { get; private set; }
     public string Name { get; private set; }
-    
+
     public Gym Gym { get; private set; }
     public int MaxDailySessions { get; private set; }
-    
+
     public Guid GymId { get; private set; }
     public List<Session> Sessions { get; private set; }
 
@@ -31,12 +31,12 @@ public class Room
 
         if (SessionOverlap(session))
             return SessionErrors.OverlappingSessions;
-                
+
         if (Sessions.Count >= MaxDailySessions)
             return SessionErrors.CannotHaveMoreDailySessions;
-        
+
         Sessions.Add(session);
-        
+
         return Result.Success;
     }
 
@@ -47,6 +47,6 @@ public class Room
             s.Date == session.Date &&
             s.StartTime < session.EndTime &&
             session.StartTime < s.EndTime);
-    
+
     private Room() { }
 }

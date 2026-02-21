@@ -7,7 +7,7 @@ namespace GymManagement.Infrastructure.Sessions.Persistence;
 public class SessionsRepository : ISessionsRepository
 {
     private readonly GymDbContext _context;
-    
+
     public SessionsRepository(GymDbContext context)
     {
         _context = context;

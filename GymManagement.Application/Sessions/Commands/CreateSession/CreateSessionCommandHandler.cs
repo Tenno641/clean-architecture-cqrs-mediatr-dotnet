@@ -11,7 +11,7 @@ public class CreateSessionCommandHandler : IRequestHandler<CreateSessionCommand,
     private readonly ISessionsRepository _sessionsRepository;
     private readonly IRoomsRepository _roomsRepository;
     private readonly IUnitOfWork _unitOfWork;
-    
+
     public CreateSessionCommandHandler(ISessionsRepository sessionsRepository, IUnitOfWork unitOfWork, IRoomsRepository roomsRepository)
     {
         _sessionsRepository = sessionsRepository;
@@ -25,7 +25,7 @@ public class CreateSessionCommandHandler : IRequestHandler<CreateSessionCommand,
 
         if (room is null)
             return Error.Validation(description: "Room is not found");
-        
+
         Session session = new Session(request.Date, request.StartTime, request.Duration, request.Type);
 
         ErrorOr<Success> result = room.AddSession(session);

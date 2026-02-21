@@ -1,7 +1,6 @@
 using System.Text.Json.Serialization;
 using GymManagement.Application;
 using GymManagement.Infrastructure;
-using GymManagement.Infrastructure.Common.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,7 +13,11 @@ builder.Services.AddApplication(builder.Configuration["mediator"]!);
 
 builder.Services.AddInfrastructure();
 
+builder.Services.AddProblemDetails();
+
 var app = builder.Build();
+
+app.UseExceptionHandler();
 
 app.MapGet("/", () => "Hello World!");
 

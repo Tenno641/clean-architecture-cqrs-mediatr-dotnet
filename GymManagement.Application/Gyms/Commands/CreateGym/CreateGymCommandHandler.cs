@@ -11,14 +11,14 @@ public class CreateGymCommandHandler : IRequestHandler<CreateGymCommand, ErrorOr
     private readonly ISubscriptionsRepository _subscriptionsRepository;
     private readonly IGymsRepository _gymsRepository;
     private readonly IUnitOfWork _unitOfWork;
-    
+
     public CreateGymCommandHandler(ISubscriptionsRepository subscriptionsRepository, IGymsRepository gymsRepository, IUnitOfWork unitOfWork)
     {
         _subscriptionsRepository = subscriptionsRepository;
         _gymsRepository = gymsRepository;
         _unitOfWork = unitOfWork;
     }
-    
+
     public async Task<ErrorOr<Guid>> Handle(CreateGymCommand request, CancellationToken cancellationToken)
     {
         Subscription? subscription = await _subscriptionsRepository.GetSubscriptionByIdAsync(request.SubscriptionId);
@@ -36,7 +36,7 @@ public class CreateGymCommandHandler : IRequestHandler<CreateGymCommand, ErrorOr
             return result.Errors;
 
         await _gymsRepository.CreateGymAsync(gym);
-        
+
         await _unitOfWork.CommitChangesAsync();
 
         return gym.Id;

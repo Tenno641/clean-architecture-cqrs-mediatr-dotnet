@@ -9,10 +9,10 @@ public class Gym
 {
     public Guid Id { get; private set; }
     public string Name { get; private set; }
-    
+
     public Subscription Subscription { get; private set; }
-    public List<Room> Rooms { get; private set; } 
-    
+    public List<Room> Rooms { get; private set; }
+
     public Guid SubscriptionId { get; private set; }
     public int MaxRooms { get; private set; }
 
@@ -30,14 +30,14 @@ public class Gym
     {
         if (Rooms.Contains(room))
             throw new ConstraintException("Room already exists in gym");
-        
+
         if (Rooms.Count >= MaxRooms)
             return GymErrors.CannotHaveMoreRooms;
-        
+
         Rooms.Add(room);
 
         return Result.Success;
     }
-    
+
     private Gym() { }
 }

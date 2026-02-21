@@ -8,5 +8,5 @@ Content-Type: application/json
   "date": "2026-02-20",
   "startTime": "14:30:00",
   "duration": 90,
-  "type": "Zumba"
+  "type": "Whatever"
 }

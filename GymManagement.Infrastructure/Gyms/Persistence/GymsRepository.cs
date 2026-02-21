@@ -8,12 +8,12 @@ namespace GymManagement.Infrastructure.Gyms.Persistence;
 public class GymsRepository : IGymsRepository
 {
     private readonly GymDbContext _gymDbContext;
-    
+
     public GymsRepository(GymDbContext gymDbContext)
     {
         _gymDbContext = gymDbContext;
     }
-    
+
     public async Task CreateGymAsync(Gym gym)
     {
         await _gymDbContext.Gyms.AddAsync(gym);
