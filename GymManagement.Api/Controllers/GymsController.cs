@@ -2,6 +2,7 @@
 using MediatR;
 using ErrorOr;
 using GymManagement.Application.Gyms.Commands.CreateGym;
+using GymManagement.Application.Gyms.Commands.DeleteGym;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GymManagement.Api.Controllers;
@@ -26,6 +27,18 @@ public class GymsController : ApiController
 
         return result.Match(
             onValue: gymId => Ok(gymId),
-            onError: errors => Problem(errors));
+            onError: Problem);
+    }
+
+    [HttpDelete("{id:guid}")]
+    public async Task<IActionResult> Delete(Guid subscriptionId, Guid id)
+    {
+        DeleteGymCommand command = new DeleteGymCommand(subscriptionId, id);
+
+        ErrorOr<Unit> result = await _sender.Send(command);
+
+        return result.Match(
+            onValue: _ => NoContent(),
+            onError: Problem);
     }
 }

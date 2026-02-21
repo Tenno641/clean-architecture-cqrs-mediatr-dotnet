@@ -18,10 +18,22 @@ public class GymsRepository : IGymsRepository
     {
         await _gymDbContext.Gyms.AddAsync(gym);
     }
-    public async Task<Gym?> GetGymById(Guid id)
+    public async Task<Gym?> GetGymByIdAsync(Guid id)
     {
         return await _gymDbContext.Gyms
             .Include(gym => gym.Rooms)
             .FirstOrDefaultAsync(gym => gym.Id == id);
+    }
+    public async Task DeleteGymAsync(Guid id)
+    {
+        Gym? gym = await _gymDbContext.Gyms
+            .FirstOrDefaultAsync(gym => gym.Id == id);
+
+        if (gym is not null)
+            _gymDbContext.Gyms.Remove(gym);
+    }
+    public void RemoveGym(Gym gym)
+    {
+        _gymDbContext.Remove(gym);
     }
 }

@@ -2,6 +2,7 @@
 using GymManagement.Application.Common.Interfaces;
 using GymManagement.Infrastructure.Common.Persistence;
 using GymManagement.Infrastructure.Gyms.Persistence;
+using GymManagement.Infrastructure.Middlewares;
 using GymManagement.Infrastructure.Rooms.Persistence;
 using GymManagement.Infrastructure.Sessions.Persistence;
 using GymManagement.Infrastructure.Subscriptions.Persistence;

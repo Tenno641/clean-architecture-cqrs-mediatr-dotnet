@@ -1,28 +1,26 @@
 ﻿using System.Data;
 using ErrorOr;
+using GymManagement.Domain.Common;
 using GymManagement.Domain.Rooms;
 using GymManagement.Domain.Subscriptions;
+using GymManagement.Domain.Subscriptions.Events;
 
 namespace GymManagement.Domain.Gyms;
 
-public class Gym
+public class Gym : Entity
 {
-    public Guid Id { get; private set; }
     public string Name { get; private set; }
-
     public Subscription Subscription { get; private set; }
     public List<Room> Rooms { get; private set; }
 
     public Guid SubscriptionId { get; private set; }
     public int MaxRooms { get; private set; }
 
-    public Gym(string name, Guid subscriptionId, int maxRoomses, Guid? id = null)
+    public Gym(string name, Guid subscriptionId, int maxRoomses, Guid? id = null) : base(id ?? Guid.CreateVersion7())
     {
         Name = name;
         SubscriptionId = subscriptionId;
-        Id = id ?? Guid.CreateVersion7();
 
-        Console.WriteLine($"const{maxRoomses}");
         MaxRooms = maxRoomses;
     }
 
@@ -35,6 +33,7 @@ public class Gym
             return GymErrors.CannotHaveMoreRooms;
 
         Rooms.Add(room);
+
 
         return Result.Success;
     }

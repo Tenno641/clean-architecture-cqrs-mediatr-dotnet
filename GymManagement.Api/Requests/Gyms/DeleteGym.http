@@ -1,0 +1,5 @@
+﻿@id = 019c76ca-34b4-7245-9341-3d1207d5a125 
+
+@subscriptionId = 019c76ca-0124-7100-a82f-a58284c6b170
+
+DELETE https://localhost:7234/subscriptions/{{subscriptionId}}/Gyms/{{id}}

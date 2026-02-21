@@ -7,4 +7,6 @@ public interface IRoomsRepository
 {
     Task CreateRoomAsync(Room room);
     Task<Room?> GetRoomById(Guid id);
+    Task<IEnumerable<Room>> ListRoomsByGymIdAsync(Guid gymId);
+    void RemoveRange(IEnumerable<Room> rooms);
 }
