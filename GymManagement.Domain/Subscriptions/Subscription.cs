@@ -1,5 +1,4 @@
 ﻿using System.Data;
-using System.Runtime.InteropServices.JavaScript;
 using ErrorOr;
 using GymManagement.Domain.Gyms;
 using GymManagement.SharedKernel.Enums;
@@ -21,7 +20,7 @@ public class Subscription
         Id = id ?? Guid.CreateVersion7();
     }
 
-    public int GetMaxNumberOfGyms(SubscriptionType subscriptionType)
+    private static int GetMaxNumberOfGyms(SubscriptionType subscriptionType)
     {
         return subscriptionType switch
         {
@@ -60,6 +59,18 @@ public class Subscription
         SubscriptionType.Pro => int.MaxValue,
         _ => throw new InvalidOperationException()
     };
+
+    public ErrorOr<Deleted> DeleteGym(Guid id)
+    {
+        Gym? gym = Gyms.FirstOrDefault(g => g.Id == id);
+
+        if (gym is null)
+            return SubscriptionErrors.GymNotFound;
+
+        Gyms.Remove(gym);
+        
+        return Result.Deleted;
+    }
 
     private Subscription() { }
 }
