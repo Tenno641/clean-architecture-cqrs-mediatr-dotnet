@@ -15,7 +15,11 @@ builder.Services.AddInfrastructure();
 
 builder.Services.AddProblemDetails();
 
+builder.Services.AddHttpContextAccessor();
+
 var app = builder.Build();
+
+app.UseEventualConsistencyMiddleware();
 
 app.UseExceptionHandler();
 

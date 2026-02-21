@@ -22,7 +22,7 @@ public class GymDeletedEventHandler : INotificationHandler<GymDeletedEvent>
         Gym? gym = await _gymsRepository.GetGymByIdAsync(notification.GymId);
 
         if (gym is null)
-            throw new InvalidOperationException();
+            throw new InvalidOperationException(); // resilient error handling
         
         _gymsRepository.RemoveGym(gym);
         

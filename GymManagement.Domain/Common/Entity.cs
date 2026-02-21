@@ -11,6 +11,13 @@ public abstract class Entity
     {
         Id = id;
     }
+
+    public List<IDomainEvent> PopDomainEvents()
+    {
+        List<IDomainEvent> events = DomainEvents;
+        DomainEvents.Clear();
+        return events;
+    }
     
     protected Entity() { }
 }
