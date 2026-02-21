@@ -24,4 +24,16 @@ public class RoomRepository : IRoomsRepository
             .Include(room => room.Sessions)
             .FirstOrDefaultAsync(room => room.Id == id);
     }
+    public async Task<IEnumerable<Room>> ListRoomsByGymIdAsync(Guid gymId)
+    {
+        IEnumerable<Room> rooms = await _context.Rooms
+            .Where(room => room.GymId == gymId)
+            .ToListAsync();
+        
+        return rooms;
+    }
+    public void RemoveRange(IEnumerable<Room> rooms)
+    {
+        _context.RemoveRange(rooms);
+    }
 }

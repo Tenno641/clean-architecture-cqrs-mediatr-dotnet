@@ -24,7 +24,7 @@ public class CreateRoomCommandHandler : IRequestHandler<CreateRoomCommand, Error
 
     public async Task<ErrorOr<Guid>> Handle(CreateRoomCommand request, CancellationToken cancellationToken)
     {
-        Gym? gym = await _gymsRepository.GetGymById(request.GymId);
+        Gym? gym = await _gymsRepository.GetGymByIdAsync(request.GymId);
 
         if (gym is null)
             return Error.NotFound(

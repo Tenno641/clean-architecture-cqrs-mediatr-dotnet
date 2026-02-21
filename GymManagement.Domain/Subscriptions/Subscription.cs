@@ -1,23 +1,23 @@
 ﻿using System.Data;
 using ErrorOr;
+using GymManagement.Domain.Common;
 using GymManagement.Domain.Gyms;
+using GymManagement.Domain.Subscriptions.Events;
 using GymManagement.SharedKernel.Enums;
 
 namespace GymManagement.Domain.Subscriptions;
 
-public class Subscription
+public class Subscription : Entity
 {
-    public Guid Id { get; private set; }
     public Guid AdminId { get; private set; }
     public SubscriptionType SubscriptionType { get; private set; }
 
     public List<Gym> Gyms { get; private set; }
 
-    public Subscription(SubscriptionType subscriptionType, Guid adminId, Guid? id = null)
+    public Subscription(SubscriptionType subscriptionType, Guid adminId, Guid? id = null): base(id ?? Guid.CreateVersion7())
     {
         SubscriptionType = subscriptionType;
         AdminId = adminId;
-        Id = id ?? Guid.CreateVersion7();
     }
 
     private static int GetMaxNumberOfGyms(SubscriptionType subscriptionType)
@@ -68,6 +68,8 @@ public class Subscription
             return SubscriptionErrors.GymNotFound;
 
         Gyms.Remove(gym);
+        
+        DomainEvents.Add(new GymDeletedEvent(Id));
         
         return Result.Deleted;
     }

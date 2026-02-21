@@ -18,7 +18,7 @@ public class GymsRepository : IGymsRepository
     {
         await _gymDbContext.Gyms.AddAsync(gym);
     }
-    public async Task<Gym?> GetGymById(Guid id)
+    public async Task<Gym?> GetGymByIdAsync(Guid id)
     {
         return await _gymDbContext.Gyms
             .Include(gym => gym.Rooms)
@@ -31,5 +31,9 @@ public class GymsRepository : IGymsRepository
         
         if (gym is not null)
             _gymDbContext.Gyms.Remove(gym);
+    }
+    public void RemoveGym(Gym gym)
+    {
+        _gymDbContext.Remove(gym);
     }
 }
