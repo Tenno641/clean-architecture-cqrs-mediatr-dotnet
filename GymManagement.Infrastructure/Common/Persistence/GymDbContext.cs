@@ -13,8 +13,8 @@ namespace GymManagement.Infrastructure.Common.Persistence;
 
 public class GymDbContext : DbContext, IUnitOfWork
 {
-    private readonly HttpContextAccessor _httpContextAccessor;
-    public GymDbContext(DbContextOptions<GymDbContext> options, HttpContextAccessor httpContextAccessor) : base(options)
+    private readonly IHttpContextAccessor _httpContextAccessor;
+    public GymDbContext(DbContextOptions<GymDbContext> options, IHttpContextAccessor httpContextAccessor) : base(options)
     {
         _httpContextAccessor = httpContextAccessor;
     }
@@ -43,22 +43,22 @@ public class GymDbContext : DbContext, IUnitOfWork
             .Select(entry => entry.Entity.PopDomainEvents())
             .SelectMany(@event => @event)
             .ToList();
-        
+
         AddDomainEventsToProcessingQueue(events);
-        
+
         await SaveChangesAsync();
     }
 
     private void AddDomainEventsToProcessingQueue(List<IDomainEvent> events)
     {
-        Queue<IDomainEvent> domainEventsQueue = 
+        Queue<IDomainEvent> domainEventsQueue =
             _httpContextAccessor.HttpContext.Items.TryGetValue("DomainEvents", out object? domainValues)
             && domainValues is Queue<IDomainEvent> existingDomainEventsQueue
                 ? existingDomainEventsQueue
                 : new Queue<IDomainEvent>();
 
         events.ForEach(@event => domainEventsQueue.Enqueue(@event));
-        
+
         _httpContextAccessor.HttpContext.Items.Add("DomainEvents", domainEventsQueue);
     }
 }

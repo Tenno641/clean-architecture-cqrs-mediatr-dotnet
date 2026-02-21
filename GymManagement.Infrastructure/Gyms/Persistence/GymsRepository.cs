@@ -28,7 +28,7 @@ public class GymsRepository : IGymsRepository
     {
         Gym? gym = await _gymDbContext.Gyms
             .FirstOrDefaultAsync(gym => gym.Id == id);
-        
+
         if (gym is not null)
             _gymDbContext.Gyms.Remove(gym);
     }

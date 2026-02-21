@@ -10,14 +10,14 @@ public class DeleteGymCommandHandler : IRequestHandler<DeleteGymCommand, ErrorOr
     private readonly IGymsRepository _gymsRepository;
     private readonly IUnitOfWork _unitOfWork;
     private readonly ISubscriptionsRepository _subscriptionsRepository;
-    
+
     public DeleteGymCommandHandler(IGymsRepository gymsRepository, ISubscriptionsRepository subscriptionsRepository, IUnitOfWork unitOfWork)
     {
         _gymsRepository = gymsRepository;
         _subscriptionsRepository = subscriptionsRepository;
         _unitOfWork = unitOfWork;
     }
-    
+
     public async Task<ErrorOr<Unit>> Handle(DeleteGymCommand request, CancellationToken cancellationToken)
     {
         Subscription? subscription = await _subscriptionsRepository.GetSubscriptionByIdAsync(request.SubscriptionId);
@@ -30,7 +30,7 @@ public class DeleteGymCommandHandler : IRequestHandler<DeleteGymCommand, ErrorOr
 
         if (result.IsError)
             return result.Errors;
-        
+
         await _gymsRepository.DeleteGymAsync(request.GymId);
 
         await _unitOfWork.CommitChangesAsync();

@@ -16,7 +16,7 @@ public class Gym : Entity
     public Guid SubscriptionId { get; private set; }
     public int MaxRooms { get; private set; }
 
-    public Gym(string name, Guid subscriptionId, int maxRoomses, Guid? id = null): base(id ?? Guid.CreateVersion7())
+    public Gym(string name, Guid subscriptionId, int maxRoomses, Guid? id = null) : base(id ?? Guid.CreateVersion7())
     {
         Name = name;
         SubscriptionId = subscriptionId;
@@ -33,7 +33,7 @@ public class Gym : Entity
             return GymErrors.CannotHaveMoreRooms;
 
         Rooms.Add(room);
-        
+
 
         return Result.Success;
     }

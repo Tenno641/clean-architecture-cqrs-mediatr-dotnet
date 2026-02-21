@@ -2,4 +2,4 @@
 
 namespace GymManagement.Domain.Subscriptions.Events;
 
-public record GymDeletedEvent(Guid GymId): IDomainEvent;
+public record GymDeletedEvent(Guid GymId) : IDomainEvent;

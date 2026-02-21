@@ -14,7 +14,7 @@ public class Subscription : Entity
 
     public List<Gym> Gyms { get; private set; }
 
-    public Subscription(SubscriptionType subscriptionType, Guid adminId, Guid? id = null): base(id ?? Guid.CreateVersion7())
+    public Subscription(SubscriptionType subscriptionType, Guid adminId, Guid? id = null) : base(id ?? Guid.CreateVersion7())
     {
         SubscriptionType = subscriptionType;
         AdminId = adminId;
@@ -68,9 +68,9 @@ public class Subscription : Entity
             return SubscriptionErrors.GymNotFound;
 
         Gyms.Remove(gym);
-        
+
         DomainEvents.Add(new GymDeletedEvent(Id));
-        
+
         return Result.Deleted;
     }
 

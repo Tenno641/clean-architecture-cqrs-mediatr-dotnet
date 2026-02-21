@@ -18,6 +18,6 @@ public abstract class Entity
         DomainEvents.Clear();
         return events;
     }
-    
+
     protected Entity() { }
 }

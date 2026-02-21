@@ -9,8 +9,8 @@ public class GymDeletedEventHandler : INotificationHandler<GymDeletedEvent>
 {
     private readonly IGymsRepository _gymsRepository;
     private readonly IUnitOfWork _unitOfWork;
-    
-    
+
+
     public GymDeletedEventHandler(IGymsRepository gymsRepository, IUnitOfWork unitOfWork)
     {
         _gymsRepository = gymsRepository;
@@ -23,9 +23,9 @@ public class GymDeletedEventHandler : INotificationHandler<GymDeletedEvent>
 
         if (gym is null)
             throw new InvalidOperationException(); // resilient error handling
-        
+
         _gymsRepository.RemoveGym(gym);
-        
+
         await _unitOfWork.CommitChangesAsync();
     }
 }

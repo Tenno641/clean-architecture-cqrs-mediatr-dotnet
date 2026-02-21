@@ -6,33 +6,29 @@ using Microsoft.EntityFrameworkCore.Storage;
 
 namespace GymManagement.Infrastructure.Middlewares;
 
-public class EventualConsistencyMiddleware
+public class EventualConsistencyMiddleware 
 {
     private readonly RequestDelegate _next;
-    private readonly IPublisher _publisher;
-    private readonly GymDbContext _dbContext;
-    
-    public EventualConsistencyMiddleware(RequestDelegate next, IPublisher publisher, GymDbContext dbContext)
+
+    public EventualConsistencyMiddleware(RequestDelegate next)
     {
         _next = next;
-        _publisher = publisher;
-        _dbContext = dbContext;
     }
 
-    public async Task InvokeAsync(HttpContext context)
+    public async Task InvokeAsync(HttpContext context, IPublisher publisher, GymDbContext gymDbContext)
     {
         context.Response.OnCompleted(async () =>
         {
-            IDbContextTransaction transaction = await _dbContext.Database.BeginTransactionAsync();
+            IDbContextTransaction transaction = await gymDbContext.Database.BeginTransactionAsync();
             try
             {
                 if (context.Items.TryGetValue("DomainEvents", out object? domainEvents) && domainEvents is Queue<IDomainEvent> existingDomainEvents)
                 {
                     while (existingDomainEvents.TryDequeue(out IDomainEvent? @event))
                     {
-                        await _publisher.Publish(@event);
+                        await publisher.Publish(@event);
                     }
-                    await _dbContext.Database.CommitTransactionAsync();
+                    await gymDbContext.Database.CommitTransactionAsync();
                 }
             }
             catch (Exception e)
@@ -41,9 +37,9 @@ public class EventualConsistencyMiddleware
             }
             finally
             {
-                await _dbContext.DisposeAsync();
+                await gymDbContext.DisposeAsync();
             }
-            
+
         });
 
         await _next(context);

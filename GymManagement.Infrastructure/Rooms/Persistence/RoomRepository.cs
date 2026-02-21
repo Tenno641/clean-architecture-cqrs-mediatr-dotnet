@@ -29,7 +29,7 @@ public class RoomRepository : IRoomsRepository
         IEnumerable<Room> rooms = await _context.Rooms
             .Where(room => room.GymId == gymId)
             .ToListAsync();
-        
+
         return rooms;
     }
     public void RemoveRange(IEnumerable<Room> rooms)
