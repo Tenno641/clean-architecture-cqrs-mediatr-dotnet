@@ -1,6 +1,8 @@
 ﻿using System.Text;
 using GymManagement.Application.Common.Interfaces;
+using GymManagement.Domain.Common.Interfaces;
 using GymManagement.Domain.Users;
+using GymManagement.Infrastructure.Authentication;
 using GymManagement.Infrastructure.Authentication.TokenGenerators;
 using GymManagement.Infrastructure.Common.Persistence;
 using GymManagement.Infrastructure.Gyms.Persistence;
@@ -26,6 +28,8 @@ public static class DependencyInjection
         services.AddScoped<IRoomsRepository, RoomRepository>();
         services.AddScoped<ISessionsRepository, SessionsRepository>();
         services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IPasswordHasher, PasswordHasher>();
+        services.AddScoped<ITokenGenerator, TokenGenerator>();
         services.AddScoped<IUnitOfWork>(serviceProvider => serviceProvider.GetRequiredService<GymDbContext>());
 
         services.AddDbContext<GymDbContext>();
@@ -59,10 +63,6 @@ public static class DependencyInjection
                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtOptions.Secret!))
                };
            });
-
-       services.AddIdentity<User, IdentityRole>()
-           .AddDefaultTokenProviders()
-           .AddEntityFrameworkStores<GymDbContext>();
 
        return services;
     }

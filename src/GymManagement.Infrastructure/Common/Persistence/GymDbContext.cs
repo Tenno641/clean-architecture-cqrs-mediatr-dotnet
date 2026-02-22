@@ -9,11 +9,10 @@ using GymManagement.Domain.Subscriptions;
 using GymManagement.Domain.Users;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace GymManagement.Infrastructure.Common.Persistence;
 
-public class GymDbContext : IdentityDbContext, IUnitOfWork
+public class GymDbContext : DbContext, IUnitOfWork
 {
     private readonly IHttpContextAccessor _httpContextAccessor;
     public GymDbContext(DbContextOptions<GymDbContext> options, IHttpContextAccessor httpContextAccessor) : base(options)

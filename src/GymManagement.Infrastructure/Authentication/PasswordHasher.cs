@@ -1,7 +1,7 @@
 ﻿using ErrorOr;
 using GymManagement.Domain.Common.Interfaces;
 
-namespace GymManagement.Api.Authentication;
+namespace GymManagement.Infrastructure.Authentication;
 
 public partial class PasswordHasher : IPasswordHasher
 {
