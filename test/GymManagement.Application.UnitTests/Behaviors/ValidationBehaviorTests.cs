@@ -29,13 +29,13 @@ public class ValidationBehaviorTests
         CreateGymCommand command = GymCommandFactory.CreateCreateGymCommand();
         Guid behaviorResult = Constants.Gym.Id;
 
-        _validatorMock.Setup(validator => validator.Validate(command))
-            .Returns(new ValidationResult());
+        _validatorMock.Setup(validator => validator.ValidateAsync(command))
+            .ReturnsAsync(new ValidationResult());
         
         _requestHandlerMock.Setup(handler => handler.Invoke(CancellationToken.None))
                     .ReturnsAsync(behaviorResult);
         
-        ValidationBehavior<CreateGymCommand, ErrorOr<Guid>> validationBehavior = new ValidationBehavior<CreateGymCommand, ErrorOr<Guid>>();
+        ValidationBehavior<CreateGymCommand, ErrorOr<Guid>> validationBehavior = new ValidationBehavior<CreateGymCommand, ErrorOr<Guid>>(_validatorMock.Object);
 
         // Act
         ErrorOr<Guid> result =await validationBehavior.Handle(command, _requestHandlerMock.Object, CancellationToken.None);
@@ -43,5 +43,26 @@ public class ValidationBehaviorTests
         // Assert
         Assert.False(result.IsError);
         Assert.Equal(result.Value, behaviorResult);
+    }
+
+    [Fact]
+    public async Task Handle_ValidationResultIsNotValid_ShouldReturnListOfErrors()
+    {
+        // Arrange 
+        CreateGymCommand command = GymCommandFactory.CreateCreateGymCommand(name: "fa");
+        List<ValidationFailure> validationFailures = [new ValidationFailure(propertyName: "Invalid Property", errorMessage: "Bad Property Value")];
+
+       _validatorMock.Setup(validator => validator.ValidateAsync(command))
+                   .ReturnsAsync(new ValidationResult(validationFailures));
+       
+       ValidationBehavior<CreateGymCommand, ErrorOr<Guid>> validationBehavior = new ValidationBehavior<CreateGymCommand, ErrorOr<Guid>>(_validatorMock.Object);
+        
+        // Act 
+        ErrorOr<Guid> result = await validationBehavior.Handle(command, _requestHandlerMock.Object, CancellationToken.None);
+        
+        // Assert
+        Assert.True(result.IsError);
+        Assert.Equal("Invalid Property", result.FirstError.Code);
+        Assert.Equal("Bad Property Value", result.FirstError.Description);
     }
 }
