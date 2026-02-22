@@ -28,7 +28,7 @@ public class EventualConsistencyMiddleware
                     {
                         await publisher.Publish(@event);
                     }
-                    await gymDbContext.Database.CommitTransactionAsync();
+                    await transaction.CommitAsync();
                 }
             }
             catch (Exception e)
