@@ -5,6 +5,7 @@
     <Platform Name="x86" />
   </Configurations>
   <Folder Name="/test/">
+    <Project Path="test/GymManagement.Application.UnitTests/GymManagement.Application.UnitTests.csproj" />
     <Project Path="test/GymManagement.Domain.UnitTests/GymManagement.Domain.UnitTests.csproj" />
     <Project Path="test/TestCommon/TestCommon.csproj" />
   </Folder>
