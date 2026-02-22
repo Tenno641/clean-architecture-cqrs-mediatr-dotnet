@@ -12,7 +12,7 @@ public class Subscription : Entity
     public Guid AdminId { get; private set; }
     public SubscriptionType SubscriptionType { get; private set; }
 
-    public List<Gym> Gyms { get; private set; }
+    public List<Gym> Gyms { get; private set; } = [];
 
     public Subscription(SubscriptionType subscriptionType, Guid adminId, Guid? id = null) : base(id ?? Guid.CreateVersion7())
     {
@@ -33,7 +33,7 @@ public class Subscription : Entity
 
     public ErrorOr<Success> AddGym(Gym gym)
     {
-        if (Gyms.Contains(gym))
+        if (GymAlreadyExists(gym))
             throw new ConstraintException("Gym already belongs to this subscription");
 
         if (Gyms.Count >= GetMaxNumberOfGyms(SubscriptionType))
@@ -73,6 +73,8 @@ public class Subscription : Entity
 
         return Result.Deleted;
     }
+
+    private bool GymAlreadyExists(Gym gym) => Gyms.Any(g => g.Id == gym.Id);
 
     private Subscription() { }
 }

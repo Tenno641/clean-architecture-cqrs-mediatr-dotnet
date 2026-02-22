@@ -16,12 +16,12 @@ public class Gym : Entity
     public Guid SubscriptionId { get; private set; }
     public int MaxRooms { get; private set; }
 
-    public Gym(string name, Guid subscriptionId, int maxRoomses, Guid? id = null) : base(id ?? Guid.CreateVersion7())
+    public Gym(string name, Guid subscriptionId, int maxRooms, Guid? id = null) : base(id ?? Guid.CreateVersion7())
     {
         Name = name;
         SubscriptionId = subscriptionId;
 
-        MaxRooms = maxRoomses;
+        MaxRooms = maxRooms;
     }
 
     public ErrorOr<Success> AddRoom(Room room)
