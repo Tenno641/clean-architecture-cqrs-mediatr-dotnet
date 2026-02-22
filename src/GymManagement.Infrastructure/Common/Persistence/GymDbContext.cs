@@ -6,14 +6,12 @@ using GymManagement.Domain.Gyms;
 using GymManagement.Domain.Rooms;
 using GymManagement.Domain.Sessions;
 using GymManagement.Domain.Subscriptions;
-using GymManagement.Domain.Users;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace GymManagement.Infrastructure.Common.Persistence;
 
-public class GymDbContext : IdentityDbContext, IUnitOfWork
+public class GymDbContext : DbContext, IUnitOfWork
 {
     private readonly IHttpContextAccessor _httpContextAccessor;
     public GymDbContext(DbContextOptions<GymDbContext> options, IHttpContextAccessor httpContextAccessor) : base(options)
@@ -21,7 +19,6 @@ public class GymDbContext : IdentityDbContext, IUnitOfWork
         _httpContextAccessor = httpContextAccessor;
     }
 
-    public DbSet<User> Users { get; set; }
     public DbSet<Subscription> Subscriptions { get; set; }
     public DbSet<Gym> Gyms { get; set; }
     public DbSet<Room> Rooms { get; set; }
