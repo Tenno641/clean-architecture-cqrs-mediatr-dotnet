@@ -1,6 +1,8 @@
-﻿namespace GymManagement.Application.Common.Interfaces;
+﻿using GymManagement.Domain.Users;
 
-public class ITokenGenerator
+namespace GymManagement.Application.Common.Interfaces;
+
+public interface ITokenGenerator
 {
-    
+    string GenerateToken(User user);
 }

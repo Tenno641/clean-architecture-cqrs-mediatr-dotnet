@@ -1,6 +1,7 @@
-﻿namespace GymManagement.Application.Authentication.Queries;
+﻿using GymManagement.Application.Authentication.Common;
+using MediatR;
+using ErrorOr;
 
-public class LoginQuery
-{
-    
-}
+namespace GymManagement.Application.Authentication.Queries;
+
+public record LoginQuery(string Email, string Password): IRequest<ErrorOr<AuthenticationResult>>;

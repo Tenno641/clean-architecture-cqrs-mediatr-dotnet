@@ -1,6 +1,14 @@
-﻿namespace GymManagement.Application.Common.Interfaces;
+﻿using GymManagement.Domain.Users;
 
-public class IUserRepository
+namespace GymManagement.Application.Common.Interfaces;
+
+public interface IUserRepository
 {
-    
+    public Task AddUserAsync(User user);
+
+    public Task<bool> ExistsByEmailAsync(string email);
+
+    public Task<User?> GetByEmailAsync(string email);
+
+    public Task<User?> GetByIdAsync(Guid userId);
 }

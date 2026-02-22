@@ -1,6 +1,6 @@
 ﻿using ErrorOr;
 
-namespace GymManagement.Infrastructure.Common.Interfaces;
+namespace GymManagement.Domain.Common.Interfaces;
 
 public interface IPasswordHasher
 {

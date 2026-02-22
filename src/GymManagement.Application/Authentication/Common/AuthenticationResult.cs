@@ -1,6 +1,5 @@
-﻿namespace GymManagement.Application.Authentication.Common;
+﻿using GymManagement.Domain.Users;
 
-public class AuthenticationResult
-{
-    
-}
+namespace GymManagement.Application.Authentication.Common;
+
+public record AuthenticationResult(User User, string Token);

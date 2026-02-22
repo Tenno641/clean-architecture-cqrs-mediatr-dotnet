@@ -1,6 +1,3 @@
 ﻿namespace GymManagement.Contracts.Authentication;
 
-public class LoginRequest
-{
-    
-}
+public record LoginRequest(string Email, string Password);
