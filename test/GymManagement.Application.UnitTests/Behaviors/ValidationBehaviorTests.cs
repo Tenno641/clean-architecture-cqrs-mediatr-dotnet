@@ -29,7 +29,7 @@ public class ValidationBehaviorTests
         CreateGymCommand command = GymCommandFactory.CreateCreateGymCommand();
         Guid behaviorResult = Constants.Gym.Id;
 
-        _validatorMock.Setup(validator => validator.ValidateAsync(command))
+        _validatorMock.Setup(validator => validator.ValidateAsync(command, CancellationToken.None))
             .ReturnsAsync(new ValidationResult());
         
         _requestHandlerMock.Setup(handler => handler.Invoke(CancellationToken.None))
@@ -52,7 +52,7 @@ public class ValidationBehaviorTests
         CreateGymCommand command = GymCommandFactory.CreateCreateGymCommand(name: "fa");
         List<ValidationFailure> validationFailures = [new ValidationFailure(propertyName: "Invalid Property", errorMessage: "Bad Property Value")];
 
-       _validatorMock.Setup(validator => validator.ValidateAsync(command))
+       _validatorMock.Setup(validator => validator.ValidateAsync(command, CancellationToken.None))
                    .ReturnsAsync(new ValidationResult(validationFailures));
        
        ValidationBehavior<CreateGymCommand, ErrorOr<Guid>> validationBehavior = new ValidationBehavior<CreateGymCommand, ErrorOr<Guid>>(_validatorMock.Object);
