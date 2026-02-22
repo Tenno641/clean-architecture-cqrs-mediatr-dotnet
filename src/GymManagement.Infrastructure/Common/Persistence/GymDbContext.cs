@@ -6,6 +6,7 @@ using GymManagement.Domain.Gyms;
 using GymManagement.Domain.Rooms;
 using GymManagement.Domain.Sessions;
 using GymManagement.Domain.Subscriptions;
+using GymManagement.Domain.Users;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Http;
 
@@ -19,6 +20,7 @@ public class GymDbContext : DbContext, IUnitOfWork
         _httpContextAccessor = httpContextAccessor;
     }
 
+    public DbSet<User> Users { get; set; }
     public DbSet<Subscription> Subscriptions { get; set; }
     public DbSet<Gym> Gyms { get; set; }
     public DbSet<Room> Rooms { get; set; }

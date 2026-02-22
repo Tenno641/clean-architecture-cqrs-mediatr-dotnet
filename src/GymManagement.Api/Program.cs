@@ -1,6 +1,7 @@
 using System.Text.Json.Serialization;
 using GymManagement.Application;
 using GymManagement.Infrastructure;
+using GymManagement.Infrastructure.Authentication;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,7 +18,13 @@ builder.Services.AddProblemDetails();
 
 builder.Services.AddHttpContextAccessor();
 
+builder.Services.AddAuthentication(builder.Configuration);
+
 var app = builder.Build();
+
+app.UseAuthentication();
+
+app.UseAuthorization();
 
 app.UseEventualConsistencyMiddleware();
 
