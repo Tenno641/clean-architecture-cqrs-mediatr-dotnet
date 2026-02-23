@@ -1,0 +1,10 @@
+﻿
+POST http://localhost:5057/Authentication
+Content-Type: application/json
+
+{
+  "FirstName": "Something",
+  "LastName": "Last-Something",
+  "Email": "Email@Something.com",
+  "Password": "@Something123"
+}

@@ -7,7 +7,7 @@ using MediatR;
 namespace GymManagement.Application.Behaviors;
 
 public class AuthorizationBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
-    where TRequest: IRequest
+    where TRequest: IRequest<TResponse>
     where TResponse: IErrorOr
 {
     private readonly ICurrentUserProvider _currentUserProvider;

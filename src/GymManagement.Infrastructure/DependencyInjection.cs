@@ -52,12 +52,12 @@ public static class DependencyInjection
        services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
            .AddJwtBearer(options =>
            {
-               options.TokenValidationParameters = new TokenValidationParameters()
+               options.TokenValidationParameters = new TokenValidationParameters
                {
                    ValidAudience = jwtOptions.Audience,
-                   ValidateAudience = true,
+                   ValidateAudience = false,
                    ValidIssuer = jwtOptions.Issuer,
-                   ValidateIssuer = true,
+                   ValidateIssuer = false,
                    ValidateIssuerSigningKey = true,
                    ValidateLifetime = true,
                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtOptions.Secret!))

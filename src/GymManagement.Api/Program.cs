@@ -3,7 +3,6 @@ using GymManagement.Api.Services;
 using GymManagement.Application;
 using GymManagement.Application.Common.Interfaces;
 using GymManagement.Infrastructure;
-using GymManagement.Infrastructure.Authentication;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,6 +20,8 @@ builder.Services.AddProblemDetails();
 builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddAuthentication(builder.Configuration);
+
+builder.Services.AddAuthorization();
 
 builder.Services.AddScoped<ICurrentUserProvider, CurrentUserProvider>();
 

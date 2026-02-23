@@ -1,8 +1,9 @@
 ﻿@GymName = "Whatever"
-@subscriptionId = 019c76ca-0124-7100-a82f-a58284c6b170
+@subscriptionId = 019c8a62-2b11-7911-98ed-5d409730107c
 
-POST https://localhost:7234/Subscriptions/{{subscriptionId}}/gyms
+POST http://localhost:5057/Subscriptions/{{subscriptionId}}/gyms
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiU29tZXRoaW5nIiwiZmFtaWx5X25hbWUiOiJMYXN0LVNvbWV0aGluZyIsImVtYWlsIjoiRW1haWxAU29tZXRoaW5nLmNvbSIsImlkIjoiMDE5YzhhNTQtNGMyNS03MjU5LTk1NTAtMGFkOThmNDhhN2M1IiwicGVybWlzc2lvbnMiOiJneW1zOmNyZWF0ZSIsImV4cCI6MTc3MTg0OTk2OH0.P65aQ00Wk7cf_6vh5YHbMuxDztE65ACHNdBxZ38cBk0
 
 {
   "Name" : {{GymName}}
