@@ -14,6 +14,7 @@ public static class DependencyInjection
             configuration.LicenseKey = licenseKey;
             configuration.RegisterServicesFromAssemblyContaining(typeof(DependencyInjection));
             configuration.AddOpenBehavior(typeof(ValidationBehavior<,>));
+            configuration.AddOpenBehavior(typeof(AuthorizationBehavior<,>));
         });
 
         services.AddValidatorsFromAssemblyContaining(typeof(DependencyInjection));
